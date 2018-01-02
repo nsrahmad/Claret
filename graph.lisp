@@ -231,4 +231,3 @@
 		   (when (> (child-number level) child-number)
 		     (setf (component level) new-node)
 		     (decf (child-number level) child-number))))))))
-    
