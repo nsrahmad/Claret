@@ -193,7 +193,7 @@
 		   (when (> (child-number level2) (child-number level))
 		     (incf (child-number level2))))))))
   (mark-modified cursor))
-    
+
 (defmethod delete-child ((cursor cursor))
   (let ((level (car (stack cursor))))
     (component-delete-child (component level) (child-number level))
