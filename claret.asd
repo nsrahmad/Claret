@@ -24,12 +24,13 @@
   :name "claret"
   :version "0.1" 
   :depends-on (:mcclim)
+  :serial t
   :components ((:file "packages")
-	       (:file "graph" :depends-on ("packages"))
-	       (:file "document" :depends-on ("packages" "graph"))
-	       (:file "boxes" :depends-on ("packages"))
-	       (:file "gui" :depends-on ("packages" "document" "boxes"))
-	       (:file "document-gui" :depends-on ("packages" "graph" "document" "gui"))
-	       (:file "section" :depends-on ("packages" "graph" "document" "gui"))
-	       (:file "paragraph" :depends-on ("packages" "graph" "document" "gui"))
-	       (:file "word" :depends-on ("packages" "graph" "document" "gui"))))
+	       (:file "graph")
+	       (:file "document")
+	       (:file "boxes")
+	       (:file "gui")
+	       (:file "document-gui")
+	       (:file "section")
+	       (:file "paragraph")
+	       (:file "word")))
