@@ -1,7 +1,5 @@
 (in-package #:graph)
 
-(declaim (optimize (debug 3)))
-
 (define-condition graph-condition (condition)
   ())
 
