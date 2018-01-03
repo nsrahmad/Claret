@@ -12,14 +12,15 @@
    :height 20 :max-height 20 :min-height 20
    :display-function 'display-info))
 
-;;; right now, we only display the name of the buffer that is on
+;;; Right now, we only display the name of the buffer that is on
 ;;; display in the master pane.  It would be a good idea to have named
-;;; views, and display the name of the buffer AND the name of the view.
+;;; views, and display the name of the buffer AND the name of the
+;;; view.
 (defun display-info (frame pane)
   (format pane "   ~a   ~a"
 	  (name (buffer (stream-default-view (master-pane pane))))
-	  ;; display the string "Def" if we are currently
-	  ;; recording a keyboard macro.
+	  ;; Display the string "Def" if we are currently recording a
+	  ;; keyboard macro.
 	  (if (recordingp frame) "Def" "")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37,8 +38,8 @@
 
 (defclass claret-pane (esa-pane-mixin application-pane) ())
 
-;;; We define a special version of the vbox pane that contains only
-;;; an application pane and an info pane.
+;;; We define a special version of the vbox pane that contains only an
+;;; application pane and an info pane.
 (defclass pair-pane (vbox-pane)
   ((%main-pane :initarg :main-pane :reader main-pane)
    (%info-pane :initarg :info-pane :reader info-pane)))
@@ -131,10 +132,9 @@
 ;;;
 ;;; Displaying panes
 
-;;; trampoline from the display function of the
-;;; application pane, to this function that includes
-;;; the view of the pane to display.  This is how we
-;;; get access to the buffer.
+;;; Trampoline from the display function of the application pane, to
+;;; this function that includes the view of the pane to display.  This
+;;; is how we get access to the buffer.
 (defgeneric display-frame-pane-view (frame pane view))
 
 (defun display-claret-pane (frame pane)
@@ -157,7 +157,7 @@
 
 (defgeneric find-claret-command-table (view component))
 
-;;; tell ESA how to find a command table
+;;; Tell ESA how to find a command table.
 (defmethod find-applicable-command-table ((frame claret-frame))
   (find-claret-command-table
    (current-view) (graph:leaf (view-cursor (current-view)))))
@@ -246,25 +246,25 @@
 ;;;
 ;;; Input/Output
 
-;;; the ESA library needs this information in order to return an
+;;; The ESA library needs this information in order to return an
 ;;; existing buffer when an attempt is made to find a file
 ;;; that is already present in some buffer of the application.
 (defmethod buffers ((frame claret-frame))
   (remove-duplicates (mapcar #'buffer (views frame)) :test #'eq))
 
-;;; tell the ESA library how to find the current buffer of the
+;;; Tell the ESA library how to find the current buffer of the
 ;;; application frame.
 (defmethod frame-current-buffer ((frame claret-frame))
   (buffer (stream-default-view (current-window))))
 
-;;; the ESA library calls this function to save the contents of
+;;; The ESA library calls this function to save the contents of
 ;;; an application buffer to a stream.  We need to supply a method
 ;;; for it.
 (defmethod frame-save-buffer-to-stream
     ((fram claret-frame) (buffer document) stream)
   (write-document-to-stream buffer stream))
 
-;;; tell the ESA library how to create a new empty buffer.
+;;; Tell the ESA library how to create a new empty buffer.
 ;;; The library calls this function whenever the user attempts
 ;;; to find a file that doesn't exist.
 (defmethod frame-make-new-buffer ((frame claret-frame) &key &allow-other-keys)
@@ -276,7 +276,7 @@
 (defmethod frame-make-buffer-from-stream ((frame claret-frame) stream)
   (read-document-from-stream stream))
 
-;;; when finding a file, the ESA library calls frame-find-file, which
+;;; When finding a file, the ESA library calls frame-find-file, which
 ;;; returns a buffer.  But the ESA library doesn't know what to do
 ;;; about that buffer.  The application must therefore put an :around
 ;;; method on that function that stores the buffer in the application
@@ -286,12 +286,12 @@
   (declare (ignore filepath))
   (let* ((buffer (call-next-method))
 	 (view (make-instance 'claret-view :buffer buffer)))
-    ;; make the new view the current one
+    ;; Make the new view the current one.
     (push view (views frame))
-    ;; put it on display
+    ;; Put it on display.
     (setf (stream-default-view (current-window)) view)))
 
-;;; this method should probably be moved to to the ESA library itself
+;;; This method should probably be moved to to the ESA library itself
 ;;; in the form of two functions that client code can call, one
 ;;; to ask the user for buffers to save, and another that determines
 ;;; whether it is safe to exit.
