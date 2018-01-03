@@ -9,8 +9,8 @@
 (defclass claret-info-pane (info-pane)
   ()
   (:default-initargs
-      :height 20 :max-height 20 :min-height 20
-      :display-function 'display-info))
+   :height 20 :max-height 20 :min-height 20
+   :display-function 'display-info))
 
 ;;; right now, we only display the name of the buffer that is on
 ;;; display in the master pane.  It would be a good idea to have named
@@ -29,7 +29,7 @@
 (defclass claret-minibuffer-pane (minibuffer-pane)
   ()
   (:default-initargs
-      :height 20 :max-height 20 :min-height 20))
+   :height 20 :max-height 20 :min-height 20))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
