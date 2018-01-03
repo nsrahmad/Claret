@@ -333,5 +333,3 @@
   (loop for child in (claret-boxes:children box)
 	do (display-box child pane x y)
 	do (incf y (+ (claret-boxes:ascent child) (claret-boxes:descent child)))))
-
-
