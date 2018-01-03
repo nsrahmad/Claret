@@ -3,7 +3,7 @@
 (declaim (optimize (debug 3)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; The info pane and how to display it.
 
 (defclass claret-info-pane (info-pane)
@@ -14,7 +14,7 @@
 
 ;;; right now, we only display the name of the buffer that is on
 ;;; display in the master pane.  It would be a good idea to have named
-;;; views, and display the name of the buffer AND the name of the view. 
+;;; views, and display the name of the buffer AND the name of the view.
 (defun display-info (frame pane)
   (format pane "   ~a   ~a"
 	  (name (buffer (stream-default-view (master-pane pane))))
@@ -23,7 +23,7 @@
 	  (if (recordingp frame) "Def" "")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; The minibuffer pane
 
 (defclass claret-minibuffer-pane (minibuffer-pane)
@@ -32,13 +32,13 @@
       :height 20 :max-height 20 :min-height 20))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; The application panes
 
 (defclass claret-pane (esa-pane-mixin application-pane) ())
 
-;;; We define a special version of the vbox pane that contains only 
-;;; an application pane and an info pane. 
+;;; We define a special version of the vbox pane that contains only
+;;; an application pane and an info pane.
 (defclass pair-pane (vbox-pane)
   ((%main-pane :initarg :main-pane :reader main-pane)
    (%info-pane :initarg :info-pane :reader info-pane)))
@@ -63,7 +63,7 @@
 			       info-pane))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Views
 
 (defclass claret-view (view)
@@ -77,7 +77,7 @@
 	(graph:make-initial-cursor (buffer view))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; The application frame
 
 (define-application-frame claret-frame (esa-frame-mixin
@@ -104,13 +104,13 @@
 ;;; main entry points
 
 (defun claret (&rest args &key new-process process-name width height)
-  "Start a Claret session with a fresh empty buffer" 
+  "Start a Claret session with a fresh empty buffer"
   (declare (ignore new-process process-name width height))
   (apply #'claret-common '(com-new-buffer) args))
 
-(defun edit-file (filename &rest args 
+(defun edit-file (filename &rest args
                   &key new-process process-name width height)
-  "Start a Claret session editing a given file" 
+  "Start a Claret session editing a given file"
   (declare (ignore new-process process-name width height))
   (apply #'claret-common `(esa-io::com-find-file ,filename) args))
 
@@ -128,13 +128,13 @@
           (run)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Displaying panes
 
-;;; trampoline from the display function of the 
+;;; trampoline from the display function of the
 ;;; application pane, to this function that includes
 ;;; the view of the pane to display.  This is how we
-;;; get access to the buffer. 
+;;; get access to the buffer.
 (defgeneric display-frame-pane-view (frame pane view))
 
 (defun display-claret-pane (frame pane)
@@ -149,7 +149,7 @@
   (display-component pane (buffer view)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Command tables
 
 (defun current-view ()
@@ -175,7 +175,7 @@
 (define-command-table delete-child-command-table)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Commands and key bindings
 
 (define-command (com-move-up :command-table up-command-table)
@@ -243,11 +243,11 @@
       (display-claret-pane *application-frame* psstream))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Input/Output
 
 ;;; the ESA library needs this information in order to return an
-;;; existing buffer when an attempt is made to find a file 
+;;; existing buffer when an attempt is made to find a file
 ;;; that is already present in some buffer of the application.
 (defmethod buffers ((frame claret-frame))
   (remove-duplicates (mapcar #'buffer (views frame)) :test #'eq))
@@ -257,8 +257,8 @@
 (defmethod frame-current-buffer ((frame claret-frame))
   (buffer (stream-default-view (current-window))))
 
-;;; the ESA library calls this function to save the contents of 
-;;; an application buffer to a stream.  We need to supply a method 
+;;; the ESA library calls this function to save the contents of
+;;; an application buffer to a stream.  We need to supply a method
 ;;; for it.
 (defmethod frame-save-buffer-to-stream
     ((fram claret-frame) (buffer document) stream)
@@ -266,7 +266,7 @@
 
 ;;; tell the ESA library how to create a new empty buffer.
 ;;; The library calls this function whenever the user attempts
-;;; to find a file that doesn't exist. 
+;;; to find a file that doesn't exist.
 (defmethod frame-make-new-buffer ((frame claret-frame) &key &allow-other-keys)
   (make-instance 'document))
 
@@ -280,7 +280,7 @@
 ;;; returns a buffer.  But the ESA library doesn't know what to do
 ;;; about that buffer.  The application must therefore put an :around
 ;;; method on that function that stores the buffer in the application
-;;; frame.  In the case of this claret application, we also need to 
+;;; frame.  In the case of this claret application, we also need to
 ;;; create a view for it.
 (defmethod frame-find-file :around ((frame claret-frame) filepath)
   (declare (ignore filepath))
@@ -294,7 +294,7 @@
 ;;; this method should probably be moved to to the ESA library itself
 ;;; in the form of two functions that client code can call, one
 ;;; to ask the user for buffers to save, and another that determines
-;;; whether it is safe to exit. 
+;;; whether it is safe to exit.
 (defmethod frame-exit :around ((frame claret-frame))
   (loop for buffer in (buffers frame)
 	when (and (needs-saving buffer)
@@ -315,7 +315,7 @@
     (call-next-method)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Displaying boxes
 
 (defgeneric display-box (box pane x y))
