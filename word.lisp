@@ -6,14 +6,14 @@
   ()
   (:default-initargs :children ""))
 
-;;; Tell the graph package how to clone a word
+;;; Tell the graph package how to clone a word.
 
 (defmethod graph:clone-component ((component word))
   (make-instance 'word))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Command tables
+;;; Command tables.
 
 (define-command-table word-table
     :inherit-from (global-claret-table
@@ -27,7 +27,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Commands
+;;; Commands.
 
 (define-command (com-self-insert :command-table word-table) ()
   (graph:add-child (view-cursor (current-view)) *current-gesture*))
@@ -61,7 +61,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Making boxes
+;;; Making boxes.
 
 (defclass word-box (claret-boxes:hbox)
   ((%word :initarg :word :reader word)
@@ -80,7 +80,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Displaying boxes
+;;; Displaying boxes.
 
 (defmethod claret-gui:display-box ((box word-box) pane x y)
   (let ((word (word box)))
