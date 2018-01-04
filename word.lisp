@@ -9,10 +9,10 @@
 ;;; Tell the graph package how to clone a word
 
 (defmethod graph:clone-component ((component word))
-  (make-instance 'word))  
+  (make-instance 'word))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Command tables
 
 (define-command-table word-table
@@ -26,7 +26,7 @@
   (find-command-table 'word-table))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Commands
 
 (define-command (com-self-insert :command-table word-table) ()
@@ -60,7 +60,7 @@
 (set-key 'com-split-paragraph 'word-table '((#\newline)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Making boxes
 
 (defclass word-box (claret-boxes:hbox)
@@ -79,7 +79,7 @@
       :text-style (medium-text-style medium))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Displaying boxes
 
 (defmethod claret-gui:display-box ((box word-box) pane x y)
