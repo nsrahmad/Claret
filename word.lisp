@@ -17,9 +17,9 @@
 
 (define-command-table word-table
     :inherit-from (global-claret-table
-		   up-command-table
-		   forward-backward-command-table
-		   delete-child-command-table))
+                   up-command-table
+                   forward-backward-command-table
+                   delete-child-command-table))
 
 (defmethod find-claret-command-table (view (component word))
   (declare (ignore view))
@@ -87,17 +87,17 @@
     (with-text-style (pane (text-style box))
       (draw-text* pane (graph:children word) x y :align-y :baseline)
       (let ((cursor (view-cursor (current-view))))
-	(when (eq word (graph:leaf cursor))
-	  (let ((xx (text-size pane
-			       (graph:children word)
-			       :text-style (text-style box)
-			       :start 0
-			       :end (graph:location cursor))))
-	    (draw-rectangle* pane
-			     (1- x)
-			     (- y (claret-boxes:ascent box) 1)
-			     (+ x (claret-boxes:width box) 1)
-			     (+ y (claret-boxes:descent box) 1)
-			     :ink +yellow+
-			     :filled nil)
-	    (draw-line* pane (+ x xx) (+ y 3) (+ x xx) (- y 15) :ink +red+)))))))
+        (when (eq word (graph:leaf cursor))
+          (let ((xx (text-size pane
+                               (graph:children word)
+                               :text-style (text-style box)
+                               :start 0
+                               :end (graph:location cursor))))
+            (draw-rectangle* pane
+                             (1- x)
+                             (- y (claret-boxes:ascent box) 1)
+                             (+ x (claret-boxes:width box) 1)
+                             (+ y (claret-boxes:descent box) 1)
+                             :ink +yellow+
+                             :filled nil)
+            (draw-line* pane (+ x xx) (+ y 3) (+ x xx) (- y 15) :ink +red+)))))))
