@@ -101,7 +101,3 @@
 			     :ink +yellow+
 			     :filled nil)
 	    (draw-line* pane (+ x xx) (+ y 3) (+ x xx) (- y 15) :ink +red+)))))))
-
-
-
-    
