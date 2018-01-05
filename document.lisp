@@ -33,12 +33,12 @@
   (pprint-logical-block (stream nil :prefix "[" :suffix "]")
     (format stream "~s ~2i" (class-name (class-of object)))
     (loop with slot-names = (slots-to-be-saved object)
-	  for slot in (sb-mop:class-slots (class-of object))
-	  do (when (member (sb-mop:slot-definition-name slot) slot-names
+	  for slot in (closer-mop:class-slots (class-of object))
+	  do (when (member (closer-mop:slot-definition-name slot) slot-names
 			   :test 'eq)
 	       (format stream "~_~W ~W "
-		       (car (sb-mop:slot-definition-initargs slot))
-		       (slot-value object (sb-mop:slot-definition-name slot)))))))
+		       (car (closer-mop:slot-definition-initargs slot))
+		       (slot-value object (closer-mop:slot-definition-name slot)))))))
 
 (defparameter *save-readably* nil)
 
