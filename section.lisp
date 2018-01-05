@@ -6,7 +6,7 @@
   ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Command tables
 
 (define-command-table section-table
@@ -20,7 +20,7 @@
   (find-command-table 'section-table))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Commands and key bindings
 
 (define-command (com-insert-section :name t :command-table claret-document-gui:document-table)
@@ -35,13 +35,13 @@
     (graph:add-child cursor (make-instance 'claret-word:word))
     (graph:move-backward cursor)
     (graph:move-down cursor 0)))
-    
+
 
 (add-command-to-command-table
  'com-insert-section 'section-table :name t :errorp nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Making boxes
 
 (defmethod claret-boxes:make-boxes ((component section) medium style)
