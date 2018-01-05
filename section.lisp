@@ -7,7 +7,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Command tables
+;;; Command tables.
 
 (define-command-table section-table
     :inherit-from (global-claret-table
@@ -21,7 +21,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Commands and key bindings
+;;; Commands and key bindings.
 
 (define-command (com-insert-section :name t :command-table claret-document-gui:document-table)
     ()
@@ -42,7 +42,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Making boxes
+;;; Making boxes.
 
 (defmethod claret-boxes:make-boxes ((component section) medium style)
   (let ((main-boxes
