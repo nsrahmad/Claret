@@ -23,7 +23,7 @@
 (asdf:defsystem :claret
   :name "claret"
   :version "0.1" 
-  :depends-on (:mcclim)
+  :depends-on (:mcclim :closer-mop)
   :serial t
   :components ((:file "packages")
 	       (:file "graph")
