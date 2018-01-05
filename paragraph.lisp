@@ -11,7 +11,7 @@
   (make-instance 'paragraph))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Command tables
 
 (define-command-table paragraph-table
@@ -25,7 +25,7 @@
   (find-command-table 'paragraph-table))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Making boxes
 
 (defun filled-line (word-boxes available-width)
@@ -49,7 +49,7 @@
   (let* ((max-ascent (reduce #'max word-boxes :key #'claret-boxes:ascent))
 	 (max-descent (reduce #'max word-boxes :key #'claret-boxes:descent)))
     (claret-boxes:make-hbox
-     available-width max-ascent max-descent 
+     available-width max-ascent max-descent
      (cons (car word-boxes)
 	   (loop for box in (cdr word-boxes)
 		 collect (claret-boxes:make-empty-box space-width 1 0)
