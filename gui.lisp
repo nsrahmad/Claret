@@ -138,7 +138,8 @@
 (defgeneric display-frame-pane-view (frame pane view))
 
 (defun display-claret-pane (frame pane)
-  (display-frame-pane-view frame pane (stream-default-view pane)))
+  (with-translation (pane 50 50)
+    (display-frame-pane-view frame pane (stream-default-view pane))))
 
 (defgeneric display-component (pane component))
 
