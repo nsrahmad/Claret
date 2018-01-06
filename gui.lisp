@@ -237,11 +237,12 @@
 (define-command (com-export-as-postscript :name t :command-table global-claret-table)
     ()
   (with-open-file (stream "stuff.ps" :direction :output :if-exists :supersede)
-    (with-output-to-postscript-stream (psstream stream)
-      (setf (stream-default-view psstream)
-	    (make-instance 'claret-view
-	      :buffer (buffer (stream-default-view (current-window)))))
-      (display-claret-pane *application-frame* psstream))))
+    (with-output-to-postscript-stream (psstream stream :device-type :b4)
+      (with-text-style (psstream (make-text-style :serif :roman :small))
+	(setf (stream-default-view psstream)
+	      (make-instance 'claret-view
+			     :buffer (buffer (stream-default-view (current-window)))))
+	(display-claret-pane *application-frame* psstream)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
