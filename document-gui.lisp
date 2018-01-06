@@ -3,7 +3,7 @@
 (declaim (optimize (debug 3)))
 
 (defmethod display-component (pane (component document))
-  (with-text-family (pane :sans-serif) 
+  (with-text-family (pane :sans-serif)
     (let ((boxes (loop for (child next) on (graph:children component)
 		       append (claret-boxes:make-boxes child pane nil)
 		       unless (null next)
@@ -15,7 +15,7 @@
 	    do (incf y (+ (claret-boxes:ascent box) (claret-boxes:descent box)))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; 
+;;;
 ;;; Command tables
 
 (define-command-table document-table
@@ -26,4 +26,3 @@
 (defmethod find-claret-command-table (view (component document))
   (declare (ignore view))
   (find-command-table 'document-table))
-
