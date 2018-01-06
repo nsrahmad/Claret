@@ -7,7 +7,7 @@
     (let ((boxes (loop for (child next) on (graph:children component)
 		       append (claret-boxes:make-boxes child pane nil)
 		       unless (null next)
-		       append (list (claret-boxes:make-empty-box 1 30 0)))))
+                         append (list (claret-boxes:make-empty-box 1 30 0)))))
       (loop with x = 0
 	    with y = 0
 	    for box in boxes
