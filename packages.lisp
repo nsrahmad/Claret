@@ -1,5 +1,5 @@
 (defpackage #:graph
-    (:use #:cl)
+  (:use #:cl)
   (:export #:with-children-mixin
 	   #:children
 	   #:component
@@ -31,7 +31,7 @@
 	   #:move-to-end))
 
 (defpackage #:claret-document
-    (:use #:cl #:graph #:esa-buffer)
+  (:use #:cl #:graph #:esa-buffer)
   (:export #:document
 	   #:slots-to-be-saved
 	   #:read-document-from-stream
@@ -52,7 +52,7 @@
 	   #:children))
 
 (defpackage #:claret-gui
-    (:use #:clim-lisp #:clim #:esa #:esa-io #:esa-buffer #:claret-document)
+  (:use #:clim-lisp #:clim #:esa #:esa-io #:esa-buffer #:claret-document)
   (:export #:display-frame-pane-vew
 	   #:display-box
 	   #:display-component
@@ -66,20 +66,20 @@
 	   #:delete-child-command-table))
 
 (defpackage #:claret-document-gui
-    (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
+  (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
   (:export #:document-table))
 
 (defpackage #:claret-section
-    (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
+  (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
   (:export #:section
 	   #:section-table))
 
 (defpackage #:claret-paragraph
-    (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
+  (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
   (:export #:paragraph
 	   #:paragraph-table))
 
 (defpackage #:claret-word
-    (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
+  (:use #:clim-lisp #:clim #:claret-document #:claret-gui :esa)
   (:export #:word
 	   #:word-table))
