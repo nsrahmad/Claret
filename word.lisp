@@ -85,7 +85,7 @@
 (defmethod claret-gui:display-box ((box word-box) pane x y)
   (let ((word (word box)))
     (with-text-style (pane (text-style box))
-      (draw-text* pane (graph:children word) x y :align-y :baseline)
+      (clim:draw-text* pane (graph:children word) x y :align-y :baseline)
       (let ((cursor (view-cursor (current-view))))
         (when (eq word (graph:leaf cursor))
           (let ((xx (text-size pane
@@ -93,11 +93,12 @@
                                :text-style (text-style box)
                                :start 0
                                :end (graph:location cursor))))
-            (draw-rectangle* pane
-                             (1- x)
-                             (- y (claret-boxes:ascent box) 1)
-                             (+ x (claret-boxes:width box) 1)
-                             (+ y (claret-boxes:descent box) 1)
-                             :ink +yellow+
-                             :filled nil)
-            (draw-line* pane (+ x xx) (+ y 3) (+ x xx) (- y 15) :ink +red+)))))))
+            (clim:draw-rectangle* pane
+                                  (1- x)
+                                  (- y (claret-boxes:ascent box) 1)
+                                  (+ x (claret-boxes:width box) 1)
+                                  (+ y (claret-boxes:descent box) 1)
+                                  :ink clim:+yellow+
+                                  :filled nil)
+            (clim:draw-line* pane (+ x xx) (+ y 3) (+ x xx) (- y 15)
+                             :ink clim:+red+)))))))
