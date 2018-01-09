@@ -1,7 +1,5 @@
 (in-package #:claret-section)
 
-(declaim (optimize (debug 3)))
-
 (defclass section (graph:component graph:with-children-mixin)
   ())
 

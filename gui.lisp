@@ -1,7 +1,5 @@
 (in-package #:claret-gui)
 
-(declaim (optimize (debug 3)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; The info pane and how to display it.

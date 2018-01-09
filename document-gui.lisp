@@ -1,7 +1,5 @@
 (in-package :claret-document-gui)
 
-(declaim (optimize (debug 3)))
-
 (defmethod display-component (pane (component document))
   (with-text-family (pane :sans-serif)
     (let ((boxes (loop for (child next) on (graph:children component)

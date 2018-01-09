@@ -1,7 +1,5 @@
 (in-package #:claret-word)
 
-(declaim (optimize (debug 3)))
-
 (defclass word (graph:component graph:with-children-mixin)
   ()
   (:default-initargs :children ""))

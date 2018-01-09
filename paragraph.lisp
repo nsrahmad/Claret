@@ -1,7 +1,5 @@
 (in-package #:claret-paragraph)
 
-(declaim (optimize (debug 3)))
-
 (defclass paragraph (graph:component graph:with-children-mixin)
   ())
 

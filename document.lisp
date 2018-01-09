@@ -1,7 +1,5 @@
 (in-package #:claret-document)
 
-(declaim (optimize (debug 3)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Input 
